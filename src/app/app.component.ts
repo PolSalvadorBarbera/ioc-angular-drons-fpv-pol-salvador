@@ -9,4 +9,5 @@ import { RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('ioc-angular-drons-fpv-pol-salvador');
+  public appName: string = 'Tenda de Drons FPV';
 }
