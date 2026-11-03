@@ -1,0 +1,16 @@
+<article class="targeta" [class.seleccionada]="seleccionada">
+  <header class="targeta-capcalera">
+    <app-etiqueta-element 
+      [categoria]="element.categoria" 
+      [destacat]="element.destacat ?? false" />
+    <time [attr.datetime]="element.dataActualitzacio">
+      {{ element.dataActualitzacio | date:'dd/MM/yyyy' }}
+    </time>
+  </header>
+  <h3>{{ element.titol }}</h3>
+  <p class="descripcio">{{ element.descripcio }}</p>
+  <p class="valoracio">
+    ★ {{ element.valoracio }}/5
+  </p>
+  <button type="button" class="boto-detall" (click)="avisaSeleccio()">Veure detall</button>
+</article>

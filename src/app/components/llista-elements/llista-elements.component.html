@@ -1,0 +1,10 @@
+<section class="graella" aria-label="Llistat d'elements">
+  @for (element of elements; track element.id) {
+    <app-targeta-element
+      [element]="element"
+      [seleccionada]="element.id === elementSeleccionatId"
+      (selecciona)="propagaSeleccio($event)" />
+  } @empty {
+    <p class="missatge-buit" role="status">No hi ha elements per mostrar.</p>
+  }
+</section>

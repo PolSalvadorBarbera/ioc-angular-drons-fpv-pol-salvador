@@ -1,25 +1,68 @@
-<main class="main-container">
-  <header class="header">
-    <h1>{{ appName }}</h1>
-    <p class="author-info">
-      Desenvolupat per <strong>Pol Salvador</strong>. Aquesta aplicació és una botiga especialitzada en drons FPV de carreres amb recanvis, electrònica i accessoris de competició.
-    </p>
-  </header>
+<a href="#contingut-principal" class="skip-link">Saltar al contingut principal</a>
 
-  <section class="card">
-    <h2>Dades del projecte</h2>
-    <ul>
-      <li><strong>Mòdul:</strong> DA2_OA01 - Programació Avançada amb Angular</li>
-      <li><strong>Unitat:</strong> RA1 - Preparació de l'entorn de desenvolupament</li>
-      <li><strong>Framework:</strong> Angular 22</li>
-      <li><strong>Estat:</strong> Projecte base llest</li>
-    </ul>
-  </section>
+<header class="capcalera">
+  <h1>Tenda de Drons FPV</h1>
+  <p>Unitat 2 - Components i interfície d'usuari</p>
+</header>
 
-  <aside class="note-aside">
-    <p><strong>Nota:</strong> Aquest projecte és la base que s'anirà ampliant durant les següents unitats.</p>
+<main id="contingut-principal" class="contenidor">
+  <nav class="filtres-zona" aria-label="Filtres del catàleg">
+    <app-barra-filtres (filtresCanviats)="actualitzaFiltres($event)" />
+  </nav>
+
+  @if (carregant()) {
+    <section class="estat-carregant" aria-live="polite" aria-busy="true">
+      <div class="spinner" aria-hidden="true"></div>
+      <p>Carregant elements...</p>
+    </section>
+  } @else {
+    <section class="resultats" aria-label="Resultats">
+      <h2>
+        Catàleg de productes
+        <span class="comptador" aria-live="polite">
+          {{ elementsFiltrats.length }} de {{ elements.length }}
+        </span>
+      </h2>
+
+      @if (filtresActuals.text || filtresActuals.categoria !== 'Totes') {
+        <p class="info-filtres">
+          Filtres actius:
+          @if (filtresActuals.text) { text «{{ filtresActuals.text }}» }
+          @if (filtresActuals.categoria !== 'Totes') { categoria {{ filtresActuals.categoria }} }
+        </p>
+      }
+
+      @if (elementsFiltrats.length > 0) {
+        <app-llista-elements
+          [elements]="elementsFiltrats"
+          [elementSeleccionatId]="elementSeleccionat?.id"
+          (selecciona)="seleccionaElement($event)" />
+      } @else {
+        <div class="sense-resultats" role="status">
+          <p><strong>No s'ha trobat cap element amb aquests filtres.</strong></p>
+          <p>Proveu un altre text o trieu la categoria «Totes».</p>
+        </div>
+      }
+    </section>
+  }
+
+  <aside class="detall" aria-live="polite" aria-label="Detall de l'element">
+    <h2>Detall del producte</h2>
+    @if (elementSeleccionat) {
+      <div class="detall-contingut">
+        <h3>{{ elementSeleccionat.titol }}</h3>
+        <p>{{ elementSeleccionat.descripcio }}</p>
+        <ul>
+          <li><strong>Categoria:</strong> {{ elementSeleccionat.categoria }}</li>
+          <li><strong>Valoració:</strong> ★ {{ elementSeleccionat.valoracio }}/5</li>
+          <li><strong>Data d'actualització:</strong> {{ elementSeleccionat.dataActualitzacio | date:'dd/MM/yyyy' }}</li>
+        </ul>
+        <button type="button" class="boto-tanca" (click)="tancaDetall()">Tanca el detall</button>
+      </div>
+    } @else {
+      <p class="detall-buit">Seleccioneu un element per veure'n el detall.</p>
+    }
   </aside>
-
-  <p class="status-badge">Projecte base llest</p>
-  <router-outlet />
 </main>
+
+<router-outlet /> 
