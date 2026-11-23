@@ -1,0 +1,104 @@
+{
+  "elements": [
+    {
+      "id": "elem-001",
+      "nom": "Dron Nazgul5 V3 6S HD",
+      "descripcio": "Quadcòpter freestyle de 5 polzades equipat amb sistema digital DJI O3",
+      "categoria": "Drons RTF",
+      "preu": 489.99,
+      "imatge": "https://placehold.co/300x200?text=Nazgul5+V3",
+      "popular": true,
+      "stock": 8
+    },
+    {
+      "id": "elem-002",
+      "nom": "Motors Xing2 2207 1855KV",
+      "descripcio": "Pack de 4 motors brushless d'alta eficiència per a bateries 6S",
+      "categoria": "Motors",
+      "preu": 95.50,
+      "imatge": "https://placehold.co/300x200?text=Motors+Xing2",
+      "popular": false,
+      "stock": 15
+    },
+    {
+      "id": "elem-003",
+      "nom": "Controladora SpeedyBee F405 V4",
+      "descripcio": "Stack amb controladora de vol F405 i variador ESC 4en1 de 55A amb Bluetooth",
+      "categoria": "Electrònica",
+      "preu": 69.90,
+      "imatge": "https://placehold.co/300x200?text=SpeedyBee+F405",
+      "popular": true,
+      "stock": 12
+    },
+    {
+      "id": "elem-004",
+      "nom": "Ulleres DJI Goggles Integra",
+      "descripcio": "Ulleres FPV digitals amb pantalles Micro-OLED a 1080p i bateria integrada",
+      "categoria": "Vídeo FPV",
+      "preu": 529.00,
+      "imatge": "https://placehold.co/300x200?text=Goggles+Integra",
+      "popular": true,
+      "stock": 5
+    },
+    {
+      "id": "elem-005",
+      "nom": "Bateria LiPo Tattu R-Line 1400mAh 6S",
+      "descripcio": "Bateria de competició amb taxa de descàrrega de 150C i connector XT60",
+      "categoria": "Bateries",
+      "preu": 38.95,
+      "imatge": "https://placehold.co/300x200?text=Bateria+Tattu+6S",
+      "popular": false,
+      "stock": 24
+    },
+    {
+      "id": "elem-006",
+      "nom": "Dron Pavo Pico Whoop",
+      "descripcio": "Micro dron cinewhoop ultralleuger pensat per a gravació en interiors",
+      "categoria": "Drons RTF",
+      "preu": 115.00,
+      "imatge": "https://placehold.co/300x200?text=Pavo+Pico",
+      "popular": false,
+      "stock": 6
+    },
+    {
+      "id": "elem-007",
+      "nom": "Receptor TBS Crossfire Nano RX",
+      "descripcio": "Mòdul receptor de llarg abast amb tecnologia UHF i telemetria completa",
+      "categoria": "Electrònica",
+      "preu": 29.90,
+      "imatge": "https://placehold.co/300x200?text=Crossfire+Nano",
+      "popular": true,
+      "stock": 18
+    },
+    {
+      "id": "elem-008",
+      "nom": "Càmera RunCam Phoenix 2 JB",
+      "descripcio": "Càmera FPV analògica de 1000TVL amb sensor d'excel·lent rendiment nocturn",
+      "categoria": "Vídeo FPV",
+      "preu": 34.50,
+      "imatge": "https://placehold.co/300x200?text=RunCam+Phoenix",
+      "popular": false,
+      "stock": 9
+    },
+    {
+      "id": "elem-009",
+      "nom": "Motors EMAX ECO II 2807",
+      "descripcio": "Motors potents de 1300KV dissenyats per a drons de 7 polzades Long Range",
+      "categoria": "Motors",
+      "preu": 82.00,
+      "imatge": "https://placehold.co/300x200?text=EMAX+ECO+II",
+      "popular": false,
+      "stock": 7
+    },
+    {
+      "id": "elem-010",
+      "nom": "Carregador HOTA D6 Pro Dual",
+      "descripcio": "Estació de càrrega intel·ligent amb doble sortida de 325W AC/DC",
+      "categoria": "Bateries",
+      "preu": 119.95,
+      "imatge": "https://placehold.co/300x200?text=Carregador+HOTA",
+      "popular": true,
+      "stock": 4
+    }
+  ]
+}
