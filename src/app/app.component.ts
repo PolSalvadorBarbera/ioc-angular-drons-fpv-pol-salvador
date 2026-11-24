@@ -1,14 +1,14 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { DatePipe } from '@angular/common';
-import { BarraFiltresComponent, FiltresElement } from './components/barra-filtres/barra-filtres.component';
+import { FormulariCercaComponent } from './components/formulari-cerca/formulari-cerca.component';
 import { LlistaElementsComponent } from './components/llista-elements/llista-elements.component';
 import { ElementService } from './services/element.service';
-import { ElementCataleg } from './models/element.model';
+import { ElementCataleg, CriterisCerca} from './models/element.model';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, BarraFiltresComponent, LlistaElementsComponent, DatePipe],
+  imports: [RouterOutlet, FormulariCercaComponent, LlistaElementsComponent, DatePipe],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
@@ -24,11 +24,8 @@ export class App implements OnInit {
     this.elementService.carregarTot();
   }
 
-  actualitzaFiltres(filtres: FiltresElement): void {
-    this.elementService.cercar({
-      terme: filtres.text,
-      categoria: filtres.categoria
-    });
+actualitzaFiltres(criteris: CriterisCerca): void {
+    this.elementService.cercar(criteris);
   }
 
   seleccionaElement(element: any): void {

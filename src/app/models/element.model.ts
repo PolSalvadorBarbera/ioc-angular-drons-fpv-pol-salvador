@@ -73,3 +73,10 @@ export interface CriterisCerca {
 
 // Model per a l'alta de nous elements amb POST
 export type NouElement = Pick<ElementCataleg, 'nom' | 'descripcio' | 'categoria' | 'preu' | 'stock'>;
+
+// Model per a l'historial de cerques a localStorage 
+export interface CercaDesada {
+  terme: string;
+  categoria: string;
+  data: string; // ISO 8601
+}

@@ -1,11 +1,10 @@
 # Tenda de Drons FPV (ioc-angular-drons-fpv-pol-salvador)
 
-## Alumne
+## Autor
 Pol Salvador Barberà
 
 ## Descripció
-Aplicació web especialitzada en drons FPV de competició, botiga per comprar electrònica, motors i bateries. Aquesta entrega correspon al RA2: Components i interfície d'usuari
-
+Aplicació web interactiva de catàleg i botiga en línia de drons FPV de carreres i freestyle, recanvis electrònics, motors i bateries. En aquest lliurament (Unitat 3 RA3) s'ha implementat la integració amb serveis externs HTTP via `json-server`, adaptadors purs de normalització de dades, gestió d'estats amb Signals, formularis reactius amb validacions síncrones, asíncrones i persistència de l'historial a `localStorage`.
 
 ## Versions utilitzades
 - **Node.js:** v24.x / v26.x
@@ -13,50 +12,66 @@ Aplicació web especialitzada en drons FPV de competició, botiga per comprar el
 - **Angular CLI:** 22.x
 - **Angular:** 22.x
 - **Git:** 2.x
+- **json-server**
 
-## Com Executar el projecte
+## Branca de treball
+- Branca d'avaluació de la Unitat 3: `ra3-serveis`
+- URL de la branca: [https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador/tree/ra3-serveis](https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador/tree/ra3-serveis)
 
-1. **Instal·lar dependències:**
+## Comandes per executar el projecte
+Per reproduir l'aplicació completament:
+
+1. **Instal·lació de dependències:**
    ```bash
    npm install
+    ```
+2. **Arrencar l'API local mock (Terminal 1):**
+   ```bash
+   npm run api
    ```
+   L'API quedarà disponible a `http://localhost:4301/elements`.
 
-2. **Executar localhost en entorn de desenvolupament:**
+3. **Arrencar el servidor d'Angular (Terminal 2):**
    ```bash
    ng serve
    ```
-   Un cop compilat, accedir des del navegador a `http://localhost:4200/`.
+   Accedir des del navegador a `http://localhost:4200/`.
 
-
-3. **Verificació de build de producció:**
+4. **Compilació de producció:**
    ```bash
-   ng build
+   npm run build
    ```
 
-## Components creats (Arquitectura RA2)
-1. **`EtiquetaElementComponent` (`src/app/components/etiqueta-element/`):**
-   - Subcomponent encarregat de mostrar la xapa de categoria i el distintiu d'estrella si és un producte destacat.
-   - Entrades: `@Input({ required: true }) categoria`, `@Input() destacat`.
+5. **Execució de proves:**
+   ```bash
+   npm test -- --watch=false
+   ```
 
-2. **`TargetaElementComponent` (`src/app/components/targeta-element/`):**
-   - Renderitza la targeta individual de cada producte, mostrant títol, descripció, valoració i data formatada amb `DatePipe`.
-   - Entrades: `@Input({ required: true }) element`, `@Input() seleccionada`.
-   - Sortida: `@Output() selecciona`.
+## Serveis i Arquitectura Implementada (RA3)
+1. **`ElementService` (`src/app/services/element.service.ts`):**
+   - Utilitza `HttpClient` per fer peticions `GET` i `POST`.
+   - Pipeline reactiu amb `Subject` i `switchMap` per cancel·lar peticions obsoletes en cercar.
+   - Exposa un Signal d'estat de només lectura (`readonly estat`) que gestiona els estats `'inicial'`, `'carregant'`, `'exit'` i `'error'`.
+   - Mètode `reintentar()` per repetir l'última consulta executada.
+   - Mètode `crearElement()` per afegir nous productes a l'API amb `POST /elements`.
 
-3. **`LlistaElementsComponent` (`src/app/components/llista-elements/`):**
-   - Graella d'elements que itera mitjançant `@for (...; track element.id)` i gestiona el bloc `@empty`.
-   - Entrades: `@Input({ required: true }) elements`, `@Input() elementSeleccionatId`.
-   - Sortida: `@Output() selecciona`.
+2. **`HistorialCerquesService` (`src/app/services/historial-cerques.service.ts`):**
+   - Gestiona l'historial de cerques recents a `localStorage` (clau: `cataleg-historial-cerques`).
+   - Evita duplicats consecutius, limita l'historial a 8 entrades i gestiona fallades amb `try/catch`.
 
-4. **`BarraFiltresComponent` (`src/app/components/barra-filtres/`):**
-   - Formulari basat en plantilles (`FormsModule`, `[(ngModel)]`) que combina cerca per text (`minlength="3"`) i desplegable de categories (`required`).
-   - Botó deshabilitat si el formulari és invàlid i botó de restabliment de filtres.
-   - Sortida: `@Output() filtresCanviats`.
+3. **Adaptador pur (`src/app/adaptadors/element.adaptador.ts`):**
+   - Transforma `ElementApiResponse` (extern) a `ElementCataleg` (intern).
+   - Aplica `trim()`, conversions numèriques segures (`numeroSegur()`), normalització de categories (`normalitzaCategoria()`), valors per defecte i dates coherents.
 
-5. **`App` (`src/app/`):**
-   - Component arrel que gestiona l'estat global, la simulació asíncrona de càrrega (`signal(true)`), el filtratge combinat, el comptador reactiu de resultats i el panell lateral de detall de l'element seleccionat.
-   
+4. **Formulari reactiu de cerca (`FormulariCercaComponent`):**
+   - Camp de cerca amb `Validators.minLength(3)` i validador asíncron `termeAmbResultatsValidator()` amb debounce de 400ms.
+   - Desplegable de categories, botó de neteja i accés directe als termes desats a l'historial.
+
+## Documentació tècnica
+Tota la informació ampliada es troba disponible a:
+- `docs/models.md`: Mapatge complet de dades API -> Model intern.
+- `docs/serveis.md`: Arquitectura del servei HTTP, flux de dades i tractament d'errors.
+- `docs/formularis.md`: Validacions síncrones, asíncrones i persistència de l'historial.
 
 ## Enllaç del repositori
-- Repositori públic: [https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador](https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador)
-- Branca d'avaluació RA2: [https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador/tree/ra1-setup](https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador/tree/ra2-components)
+- [https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador](https://github.com/PolSalvadorBarbera/ioc-angular-drons-fpv-pol-salvador)

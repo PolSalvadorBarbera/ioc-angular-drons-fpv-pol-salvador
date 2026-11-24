@@ -1,0 +1,65 @@
+<form class="formulari-cerca" [formGroup]="formulari" (ngSubmit)="enviar()" aria-label="Cerca reactiva de productes">
+  <div class="fila-cerca">
+    <div class="camp-grup">
+      <label for="cerca-terme">Cercar producte FPV</label>
+      <div class="input-amb-spinner">
+        <input
+          id="cerca-terme"
+          type="search"
+          formControlName="terme"
+          placeholder="Ex: Nazgul, Motors, DJI..."
+          [class.invalid]="mostrarErrors"
+          aria-describedby="ajuda-terme error-terme" />
+
+        @if (termeControl.pending) {
+          <span class="spinner-petit" aria-hidden="true"></span>
+          <span class="visually-hidden">Comprovant coincidències a l'API...</span>
+        }
+      </div>
+      <!-- <span id="ajuda-terme" class="ajuda-text">Mínim 3 caràcters.</span> -->
+
+      @if (mostrarErrors) {
+        <p id="error-terme" class="error-missatge" role="alert">
+          {{ missatgeError }}
+        </p>
+      }
+    </div>
+
+    <div class="camp-grup">
+      <label for="cerca-categoria">Categoria</label>
+      <select id="cerca-categoria" formControlName="categoria">
+        @for (cat of categories; track cat) {
+          <option [value]="cat">{{ cat }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="botons-accio">
+      <button type="submit" class="boto-primari" [disabled]="formulari.invalid || formulari.pending">
+        Cercar
+      </button>
+      <button type="button" class="boto-secundari" (click)="netejar()">
+        Netejar
+      </button>
+    </div>
+  </div>
+</form>
+
+<!-- Historial de cerques a localStorage -->
+@if (historial.historial().length > 0) {
+  <section class="historial-zona" aria-label="Historial de cerques">
+    <div class="historial-capcalera">
+      <h4>Historial de cerques recents:</h4>
+      <button type="button" class="boto-esborrar-historial" (click)="historial.netejar()">
+        Esborrar historial
+      </button>
+    </div>
+    <div class="historial-llista">
+      @for (item of historial.historial(); track item.data) {
+        <button type="button" class="xapa-historial" (click)="recuperar(item)" [title]="'Cercat el ' + (item.data | date:'dd/MM/yyyy HH:mm')">
+          <strong>«{{ item.terme }}»</strong> ({{ item.categoria }})
+        </button>
+      }
+    </div>
+  </section>
+}

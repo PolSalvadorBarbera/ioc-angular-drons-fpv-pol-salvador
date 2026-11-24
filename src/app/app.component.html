@@ -6,8 +6,9 @@
 </header>
 
 <main id="contingut-principal" class="contenidor">
+
   <nav class="filtres-zona" aria-label="Filtres del catàleg">
-    <app-barra-filtres (filtresCanviats)="actualitzaFiltres($event)" />
+    <app-formulari-cerca (cercaEnviada)="actualitzaFiltres($event)" />
     <!-- Botó per provar la petició POST de l'Exercici 3 -->
     <div style="margin-top: 0.5rem; text-align: right;">
       <button type="button" class="boto-post" (click)="crearElementExemple()">
