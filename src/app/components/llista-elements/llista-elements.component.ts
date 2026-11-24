@@ -10,7 +10,7 @@ import { TargetaElementComponent } from '../targeta-element/targeta-element.comp
 })
 export class LlistaElementsComponent {
   @Input({ required: true }) elements: Element[] = [];
-  @Input() elementSeleccionatId?: number;
+  @Input() elementSeleccionatId?: string | number; // Canvi de tipus a string
   @Output() selecciona = new EventEmitter<Element>();
 
   propagaSeleccio(element: Element): void {

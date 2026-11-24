@@ -117,3 +117,33 @@
   border-radius: 8px;
   color: #64748b;
 }
+
+.boto-post {
+  padding: 0.45rem 0.9rem;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  &:hover { background-color: #15803d; }
+}
+
+.estat-error {
+  padding: 2rem;
+  background-color: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+  text-align: center;
+  color: #991b1b;
+
+  .boto-reintentar {
+    padding: 0.5rem 1rem;
+    background-color: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+}

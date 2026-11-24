@@ -2,60 +2,73 @@
 
 <header class="capcalera">
   <h1>Tenda de Drons FPV</h1>
-  <p>Unitat 2 - Components i interfície d'usuari</p>
+  <p>Unitat 3 - Serveis externs, HTTP i formularis reactius (RA3)</p>
 </header>
 
 <main id="contingut-principal" class="contenidor">
   <nav class="filtres-zona" aria-label="Filtres del catàleg">
     <app-barra-filtres (filtresCanviats)="actualitzaFiltres($event)" />
+    <!-- Botó per provar la petició POST de l'Exercici 3 -->
+    <div style="margin-top: 0.5rem; text-align: right;">
+      <button type="button" class="boto-post" (click)="crearElementExemple()">
+        + Crear producte de prova (POST)
+      </button>
+    </div>
   </nav>
 
-  @if (carregant()) {
+  <!-- 1. Estat de càrrega -->
+  @if (estatServei().estat === 'carregant') {
     <section class="estat-carregant" aria-live="polite" aria-busy="true">
       <div class="spinner" aria-hidden="true"></div>
-      <p>Carregant elements...</p>
+      <p>Carregant elements des de l'API...</p>
     </section>
-  } @else {
+  }
+
+  <!-- 2. Estat d'error amb botó reintentar -->
+  @if (estatServei().estat === 'error') {
+    <section class="estat-error" role="alert">
+      <p class="missatge-error">⚠️ {{ estatServei().error }}</p>
+      <button type="button" class="boto-reintentar" (click)="reintentar()">Reintentar</button>
+    </section>
+  }
+
+  <!-- 3. Estat d'èxit: catàleg carregat des de l'API -->
+  @if (estatServei().estat === 'exit') {
     <section class="resultats" aria-label="Resultats">
       <h2>
-        Catàleg de productes
+        Catàleg de productes (API Local)
         <span class="comptador" aria-live="polite">
-          {{ elementsFiltrats.length }} de {{ elements.length }}
+          {{ estatServei().elements.length }} elements disponibles
         </span>
       </h2>
 
-      @if (filtresActuals.text || filtresActuals.categoria !== 'Totes') {
-        <p class="info-filtres">
-          Filtres actius:
-          @if (filtresActuals.text) { text «{{ filtresActuals.text }}» }
-          @if (filtresActuals.categoria !== 'Totes') { categoria {{ filtresActuals.categoria }} }
-        </p>
-      }
-
-      @if (elementsFiltrats.length > 0) {
+      @if (estatServei().elements.length > 0) {
         <app-llista-elements
-          [elements]="elementsFiltrats"
-          [elementSeleccionatId]="elementSeleccionat?.id"
+          [elements]="estatServei().elements"
+          [elementSeleccionatId]="$any(elementSeleccionat?.id)"
           (selecciona)="seleccionaElement($event)" />
       } @else {
         <div class="sense-resultats" role="status">
-          <p><strong>No s'ha trobat cap element amb aquests filtres.</strong></p>
-          <p>Proveu un altre text o trieu la categoria «Totes».</p>
+          <p><strong>No s'ha trobat cap producte amb aquests filtres.</strong></p>
+          <p>Proveu una altra cerca o canvieu de categoria.</p>
         </div>
       }
     </section>
   }
 
+  <!-- Panell lateral de detall -->
   <aside class="detall" aria-live="polite" aria-label="Detall de l'element">
     <h2>Detall del producte</h2>
     @if (elementSeleccionat) {
       <div class="detall-contingut">
-        <h3>{{ elementSeleccionat.titol }}</h3>
+        <h3>{{ elementSeleccionat.nom }}</h3>
         <p>{{ elementSeleccionat.descripcio }}</p>
         <ul>
           <li><strong>Categoria:</strong> {{ elementSeleccionat.categoria }}</li>
-          <li><strong>Valoració:</strong> ★ {{ elementSeleccionat.valoracio }}/5</li>
-          <li><strong>Data d'actualització:</strong> {{ elementSeleccionat.dataActualitzacio | date:'dd/MM/yyyy' }}</li>
+          <li><strong>Preu:</strong> {{ elementSeleccionat.preu }} €</li>
+          <li><strong>Estoc disponible:</strong> {{ elementSeleccionat.stock }} unitats</li>
+          <li><strong>Destacat:</strong> {{ elementSeleccionat.esPopular ? 'Sí ★' : 'No' }}</li>
+          <li><strong>Data registre:</strong> {{ elementSeleccionat.dataAfegit | date:'dd/MM/yyyy' }}</li>
         </ul>
         <button type="button" class="boto-tanca" (click)="tancaDetall()">Tanca el detall</button>
       </div>
@@ -65,4 +78,4 @@
   </aside>
 </main>
 
-<router-outlet /> 
+<router-outlet />

@@ -1,3 +1,5 @@
+// src/app/models/element.model.ts
+
 // Categories oficials tancades de la botiga FPV
 export type CategoriaElement = 
   | 'Drons RTF' 
@@ -8,7 +10,7 @@ export type CategoriaElement =
 
 // 1. Model extern: format exacte que retorna l'API (tools/api/cataleg.json)
 export interface ElementApiResponse {
-  id: string;
+  id: string | number; // Stging o numero
   nom: string;
   descripcio: string;
   categoria: string;
@@ -18,17 +20,34 @@ export interface ElementApiResponse {
   stock: number;
 }
 
-// 2. Model intern: estructura rica que fa servir la nostra aplicació Angular
-export interface ElementCataleg {
-  id: string;
+// 2. Model base compatible amb l'EAC2 (soluciona els errors de dades-mock.ts)
+export interface Element {
+  id: string | number;
+  titol?: string;
+  nom?: string;
+  descripcio: string;
+  categoria: CategoriaElement;
+  dataActualitzacio?: string;
+  valoracio?: number;
+  destacat?: boolean;
+  preu?: number;
+  imatge?: string;
+  esPopular?: boolean;
+  stock?: number;
+  dataAfegit?: Date;
+}
+
+// 3. Model intern complet per a l'EAC3 (Unitat 3)
+export interface ElementCataleg extends Element {
+  id: string | number;
   nom: string;
   descripcio: string;
   categoria: CategoriaElement;
   preu: number;
   imatge: string;
-  esPopular: boolean;       // Renombrat des de 'popular' per convenció booleana
-  stock: number;           // Camp numèric de control d'estoc
-  dataAfegit?: Date;       // Camp temporal calculat per l'adaptador
+  esPopular: boolean;
+  stock: number;
+  dataAfegit?: Date;
 }
 
 // Embolcall de cerca per a respostes d'API
@@ -37,12 +56,20 @@ export interface ElementsCercaResponse {
   total: number;
 }
 
-// Estats del servei patró semàfor
+// Estats del servei segons el patró de semàfor dels apunts
 export type EstatServei = 'inicial' | 'carregant' | 'exit' | 'error';
 
 export interface EstatElements {
   estat: EstatServei;
   elements: ElementCataleg[];
   error?: string;
-
 }
+
+// Criteris de cerca
+export interface CriterisCerca {
+  terme: string;
+  categoria: string;
+}
+
+// Model per a l'alta de nous elements amb POST
+export type NouElement = Pick<ElementCataleg, 'nom' | 'descripcio' | 'categoria' | 'preu' | 'stock'>;

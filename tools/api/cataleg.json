@@ -15,7 +15,7 @@
       "nom": "Motors Xing2 2207 1855KV",
       "descripcio": "Pack de 4 motors brushless d'alta eficiència per a bateries 6S",
       "categoria": "Motors",
-      "preu": 95.50,
+      "preu": 95.5,
       "imatge": "https://placehold.co/300x200?text=Motors+Xing2",
       "popular": false,
       "stock": 15
@@ -25,7 +25,7 @@
       "nom": "Controladora SpeedyBee F405 V4",
       "descripcio": "Stack amb controladora de vol F405 i variador ESC 4en1 de 55A amb Bluetooth",
       "categoria": "Electrònica",
-      "preu": 69.90,
+      "preu": 69.9,
       "imatge": "https://placehold.co/300x200?text=SpeedyBee+F405",
       "popular": true,
       "stock": 12
@@ -35,7 +35,7 @@
       "nom": "Ulleres DJI Goggles Integra",
       "descripcio": "Ulleres FPV digitals amb pantalles Micro-OLED a 1080p i bateria integrada",
       "categoria": "Vídeo FPV",
-      "preu": 529.00,
+      "preu": 529,
       "imatge": "https://placehold.co/300x200?text=Goggles+Integra",
       "popular": true,
       "stock": 5
@@ -55,7 +55,7 @@
       "nom": "Dron Pavo Pico Whoop",
       "descripcio": "Micro dron cinewhoop ultralleuger pensat per a gravació en interiors",
       "categoria": "Drons RTF",
-      "preu": 115.00,
+      "preu": 115,
       "imatge": "https://placehold.co/300x200?text=Pavo+Pico",
       "popular": false,
       "stock": 6
@@ -65,7 +65,7 @@
       "nom": "Receptor TBS Crossfire Nano RX",
       "descripcio": "Mòdul receptor de llarg abast amb tecnologia UHF i telemetria completa",
       "categoria": "Electrònica",
-      "preu": 29.90,
+      "preu": 29.9,
       "imatge": "https://placehold.co/300x200?text=Crossfire+Nano",
       "popular": true,
       "stock": 18
@@ -75,7 +75,7 @@
       "nom": "Càmera RunCam Phoenix 2 JB",
       "descripcio": "Càmera FPV analògica de 1000TVL amb sensor d'excel·lent rendiment nocturn",
       "categoria": "Vídeo FPV",
-      "preu": 34.50,
+      "preu": 34.5,
       "imatge": "https://placehold.co/300x200?text=RunCam+Phoenix",
       "popular": false,
       "stock": 9
@@ -85,7 +85,7 @@
       "nom": "Motors EMAX ECO II 2807",
       "descripcio": "Motors potents de 1300KV dissenyats per a drons de 7 polzades Long Range",
       "categoria": "Motors",
-      "preu": 82.00,
+      "preu": 82,
       "imatge": "https://placehold.co/300x200?text=EMAX+ECO+II",
       "popular": false,
       "stock": 7
@@ -99,6 +99,47 @@
       "imatge": "https://placehold.co/300x200?text=Carregador+HOTA",
       "popular": true,
       "stock": 4
+    },
+    {
+      "nom": "Dron CineLog 35 V2 HD",
+      "descripcio": "Quadcòpter cinemàtic d alta estabilitat per a càmeres GoPro",
+      "categoria": "Drons RTF",
+      "preu": 399,
+      "stock": 7,
+      "imatge": "https://placehold.co/300x200?text=Dron%20CineLog%2035%20V2%20HD",
+      "popular": false,
+      "id": "ee88sJtuX5I"
+    },
+    {
+      "nom": "Dron CineLog 35 V2 HD",
+      "descripcio": "Quadcòpter cinemàtic d alta estabilitat per a càmeres GoPro",
+      "categoria": "Drons RTF",
+      "preu": 399,
+      "stock": 7,
+      "imatge": "https://placehold.co/300x200?text=Dron%20CineLog%2035%20V2%20HD",
+      "popular": false,
+      "id": "qf8G-X8k_30"
+    },
+    {
+      "nom": "Dron CineLog 35 V2 HD",
+      "descripcio": "Quadcòpter cinemàtic d alta estabilitat per a càmeres GoPro",
+      "categoria": "Drons RTF",
+      "preu": 399,
+      "stock": 7,
+      "imatge": "https://placehold.co/300x200?text=Dron%20CineLog%2035%20V2%20HD",
+      "popular": false,
+      "id": "lExWPlaYZ1c"
+    },
+    {
+      "nom": "Dron CineLog 35 V2 HD",
+      "descripcio": "Quadcòpter cinemàtic d alta estabilitat per a càmeres GoPro",
+      "categoria": "Drons RTF",
+      "preu": 399,
+      "stock": 7,
+      "imatge": "https://placehold.co/300x200?text=Dron%20CineLog%2035%20V2%20HD",
+      "popular": false,
+      "id": "XBdrBn0uVBc"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }
